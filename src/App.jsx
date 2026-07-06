@@ -10,20 +10,23 @@ import Interview from "./pages/Interview.jsx";
 import Applications from "./pages/Applications.jsx";
 import Profile from "./pages/Profile.jsx";
 import { user } from "./data/mockData.js";
+import UploadJD from "./pages/UploadJD.jsx";
 
 export default function App() {
   const [page, setPage] = useState("landing");
 
-  // if (page === "landing") {
-  //   return <Landing onStart={() => setPage("dashboard")} />;
-  // }
+  if (page === "landing") {
+    return <Landing onStart={() => setPage("dashboard")} />;
+  }
 
   const renderPage = () => {
     switch (page) {
       case "dashboard":
         return <Dashboard onNavigate={setPage} />;
-      case "upload":
+      case "uploadCV":
         return <UploadCV onNavigate={setPage} />;
+      case "uploadJD":
+        return <UploadJD onNavigate={setPage} />;
       case "analysis":
         return <Analysis onNavigate={setPage} />;
       case "improvement":
@@ -46,8 +49,8 @@ export default function App() {
       <Sidebar active={page} onNavigate={setPage} />
       <main className="main-shell">
         <Header user={user} />
-        {/* {renderPage()} */}
-        <Dashboard onNavigate={setPage} />;
+        {renderPage()}
+        {/* <UploadCV onNavigate={setPage} /> */}
       </main>
     </div>
   );
