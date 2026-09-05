@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header.jsx";
 import Sidebar from "./components/Sidebar.jsx";
 import Landing from "./pages/Landing.jsx";
@@ -9,11 +9,49 @@ import Improvement from "./pages/Improvement.jsx";
 import Interview from "./pages/Interview.jsx";
 import Applications from "./pages/Applications.jsx";
 import Profile from "./pages/Profile.jsx";
-import { user } from "./data/mockData.js";
 import UploadJD from "./pages/UploadJD.jsx";
+import { LogIn } from "lucide-react";
+import Login from "./components/Login.jsx";
+import { authFetch } from "./util/authFetch.js";
 
 export default function App() {
   const [page, setPage] = useState("landing");
+  const [status, setStatus] = useState("loading");
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      try {
+        const response = await authFetch("/auth/me");
+
+        const user = await response.json();
+
+        console.log("User user:", user);
+
+        if (response.status === 401 || !response.ok) {
+          setStatus("unauthenticated");
+          setUser(null);
+          return;
+        }
+
+        if (!user) {
+          setStatus("unauthenticated");
+          setUser(null);
+          return;
+        }
+
+        setPage("dashboard");
+        setUser(user);
+        setStatus("authenticated");
+      } catch (error) {
+        console.error("Authentication check error:", error);
+        setStatus("unauthenticated");
+        setUser(null);
+      }
+    };
+
+    checkAuthentication();
+  }, []);
 
   if (page === "landing") {
     return <Landing onStart={() => setPage("dashboard")} />;
@@ -46,6 +84,7 @@ export default function App() {
 
   return (
     <div className="app-shell">
+      {!user && <Login />}
       <Sidebar active={page} onNavigate={setPage} />
       <main className="main-shell">
         <Header user={user} />

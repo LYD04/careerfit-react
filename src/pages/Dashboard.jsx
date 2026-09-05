@@ -23,10 +23,10 @@ export default function Dashboard({ onNavigate }) {
       <div className="page-title-row">
         <div>
           <h1>
-            {textMap.welcome} {user.name}
+            {textMap.welcome} {user?.name}
           </h1>
           <p className="muted">
-            {textMap.currentTargetRole}: {user.targetRole}
+            {textMap.currentTargetRole}: {user?.targetRole}
           </p>
         </div>
         <Button onClick={() => onNavigate("upload")}>
@@ -68,7 +68,7 @@ export default function Dashboard({ onNavigate }) {
           </div>
           <ol className="action-list">
             {newActions.map((action, index) => (
-              <li>{action}</li>
+              <li key={index}>{action}</li>
             ))}
           </ol>
           <Button onClick={() => onNavigate("improvement")}>

@@ -1,10 +1,11 @@
-export const user = {
-  name: "Yedam",
-  targetRole: "Marketing Intern",
-  company: "Google Korea",
-  university: "Beijing Normal University",
-};
+// export const user = {
+//   name: "Yedam",
+//   targetRole: "Marketing Intern",
+//   company: "Google Korea",
+//   university: "Beijing Normal University",
+// };
 
+export const user = null;
 // export const metrics = [
 //   { label: 'Current CV Match', value: '76%', helper: 'Strong potential for this role' },
 //   { label: 'Interview Readiness', value: '42%', helper: '4 of 10 questions completed' },
