@@ -11,7 +11,7 @@ import {
 } from "../data/mockData.js";
 import { textMap } from "../assets/textMap.js";
 
-export default function Dashboard({ onNavigate }) {
+export default function Dashboard({ onNavigate, user }) {
   const icons = [
     <BarChart3 size={22} />,
     // <CheckCircle2 size={22} />,
@@ -25,9 +25,9 @@ export default function Dashboard({ onNavigate }) {
           <h1>
             {textMap.welcome} {user?.name}
           </h1>
-          <p className="muted">
+          {/* <p className="muted">
             {textMap.currentTargetRole}: {user?.targetRole}
-          </p>
+          </p> */}
         </div>
         <Button onClick={() => onNavigate("upload")}>
           {textMap.newAnalysis}

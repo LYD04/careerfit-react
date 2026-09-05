@@ -60,7 +60,7 @@ export default function App() {
   const renderPage = () => {
     switch (page) {
       case "dashboard":
-        return <Dashboard onNavigate={setPage} />;
+        return <Dashboard onNavigate={setPage} user={user} />;
       case "uploadCV":
         return <UploadCV onNavigate={setPage} />;
       case "uploadJD":
